@@ -438,7 +438,7 @@ CREATE TABLE public."KiralamaSozlesmesi" (
     musteri_tc bigint NOT NULL,
     ehliyetno bigint NOT NULL,
     plaka character varying(10) NOT NULL,
-    kirasekli character varying(20) NOT NULL,
+    kirasekli integer NOT NULL,
     gun smallint NOT NULL,
     tutar integer NOT NULL,
     ctarih date NOT NULL,
@@ -540,7 +540,7 @@ CREATE TABLE public.ehliyet (
     ehliyetno bigint NOT NULL,
     tc bigint NOT NULL,
     alinmatarihi date NOT NULL,
-    verildigisehir character varying(20) NOT NULL
+    verildigisehir integer NOT NULL
 );
 
 
@@ -704,6 +704,452 @@ ALTER TABLE ONLY public."KiralamaSozlesmesi" ALTER COLUMN id SET DEFAULT nextval
 --
 
 ALTER TABLE ONLY public."YakitDurumu" ALTER COLUMN id SET DEFAULT nextval('public."YakitDurumu_id_seq"'::regclass);
+
+
+--
+-- Data for Name: AracBakim; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."AracBakim" (id, arac_plaka, bakim_tarihi, bakim_aciklamasi, bakim_ucreti) FROM stdin;
+17	54BAH48	2023-12-26	genel	2500
+18	54BAH48	2023-12-26	motor	5500
+19	54BAH48	2023-12-26	yağ	6000
+16	54BAH48	2020-12-26	yağ değişimi	6000
+20	34TCP54	2023-12-26	yağ değişme	12000
+\.
+
+
+--
+-- Data for Name: FaturaTablo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."FaturaTablo" (id, satis_id, tutar, odeme_tarihi, odeme_durumu, islem_tarihi) FROM stdin;
+16	41	500	2023-12-26	t	2023-12-30
+15	39	480	2023-12-26	t	2023-12-30
+14	37	800	2023-12-26	t	2023-12-30
+17	43	500	2023-12-26	t	2023-12-30
+18	45	800	\N	f	2023-12-30
+19	47	500	\N	f	2023-12-30
+\.
+
+
+--
+-- Data for Name: HasarTablosu; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."HasarTablosu" (id, arac_plaka, "yapanKisi", hasar_tarihi, hasar_aciklamasi, hasar_ucreti) FROM stdin;
+8	34TCP54	98527388990	2023-12-26	ön tampon	12500
+10	54BAH48	98527388990	2021-12-26	motor	2500
+9	34TCP54	24656802582	2023-12-26	ayna	2500
+12	54BAH48	53648585714	2023-12-26	arka tampon	5500
+13	34TC034	99982851090	2023-12-26	pert	15000
+\.
+
+
+--
+-- Data for Name: KiraSekliTablo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."KiraSekliTablo" (id, adi, "indirimYuzdesi") FROM stdin;
+3	Günlük	0
+4	Haftalık	20
+5	Aylık	30
+\.
+
+
+--
+-- Data for Name: KiralamaGecmisi; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."KiralamaGecmisi" (id, musteri_tc, adsoyad, plaka, marka, seri, yil, renk, gun, fiyat, tutar, tarih1, tarih2) FROM stdin;
+36	55252456521	MOHAMMED ALKERDİ	34TCP54	BMW	530i	2015	beyaz	4	200	800	2023-12-26	2023-12-30
+37	55252456521	MOHAMMED ALKERDİ	34TCP54	BMW	530i	2015	beyaz	4	200	800	2023-12-26	2023-12-30
+38	99982851090	BASHAR EID	99XX299	Mercedes	C220	2001	Lacivert	4	120	480	2023-12-26	2023-12-30
+39	99982851090	BASHAR EID	99XX299	Mercedes	C220	2001	Lacivert	4	120	480	2023-12-26	2023-12-30
+40	99517598555	HUSEYN EMİRALİZADE	34AZE54	Renault	CLİO	2015	beyaz	4	125	500	2023-12-26	2023-12-30
+41	99517598555	HUSEYN EMİRALİZADE	34AZE54	Renault	CLİO	2015	beyaz	4	125	500	2023-12-26	2023-12-30
+42	52409528053	Burak Kara	34BAZ48	Renault	CLİO	2015	beyaz	4	125	500	2023-12-26	2023-12-30
+43	52409528053	Burak Kara	34BAZ48	Renault	CLİO	2015	beyaz	4	125	500	2023-12-26	2023-12-30
+44	38997469832	Elif Çelik	34TCP54	BMW	530i	2015	beyaz	4	200	800	2023-12-26	2023-12-30
+45	38997469832	Elif Çelik	34TCP54	BMW	530i	2015	beyaz	4	200	800	2023-12-26	2023-12-30
+46	99982851090	BASHAR EID	34TCC54	FİAT	Linea	2015	beyaz	4	150	500	2023-12-26	2023-12-30
+47	99982851090	BASHAR EID	34TCC54	FİAT	Linea	2015	beyaz	4	150	500	2023-12-26	2023-12-30
+\.
+
+
+--
+-- Data for Name: KiralamaSozlesmesi; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."KiralamaSozlesmesi" (id, musteri_tc, ehliyetno, plaka, kirasekli, gun, tutar, ctarih, dtarih, kiraucreti) FROM stdin;
+51	94558194054	60391350	34AZE48	3	4	500	2023-12-26	2023-12-30	125
+52	94558194054	60391350	34BAH49	3	4	500	2023-12-26	2023-12-30	125
+53	99982851090	24565	34TCP54	3	16	3200	2023-12-26	2024-01-11	200
+\.
+
+
+--
+-- Data for Name: YakitDurumu; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."YakitDurumu" (id, arac_plaka, "yakitTipi", "ortalamaTuketim", kalanlitre) FROM stdin;
+19	10AA935	Benzin	15	60
+27	34CHH48	Benzin	8	50
+31	34BAZ48	Benzin	8	50
+32	34AZE48	Benzin	8	50
+33	34AZE54	Benzin	8	50
+34	34TCP54	Benzin	12	50
+35	34BAH45	Dizel	8	50
+36	34BAH49	Benzin	8	50
+37	34BAH51	Benzin	8	50
+38	34BAH52	Benzin	8	50
+22	34TC034	Benzin	60	50
+28	34HPP48	Benzin	12	80
+25	34TCC54	Benzin + LPG	12	50
+29	54BAH48	Benzin	8	60
+23	99XX299	Dizel	13	40
+\.
+
+
+--
+-- Data for Name: arac; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.arac (plaka, marka, seri, renk, km, yakitdurumu, kullanimdurumu, kiraucreti, yil) FROM stdin;
+34BAZ48	Renault	CLİO	beyaz	65000	31	24	125	2015
+34AZE48	Renault	CLİO	beyaz	65000	32	25	125	2015
+34AZE54	Renault	CLİO	beyaz	65000	33	26	125	2015
+34TCP54	BMW	530i	beyaz	65000	34	27	200	2015
+34BAH45	Renault	CLİO	beyaz	65000	35	28	125	2015
+34BAH49	Renault	CLİO	beyaz	65000	36	29	125	2015
+34BAH51	Renault	CLİO	beyaz	65000	37	30	125	2015
+34BAH52	Renault	CLİO	beyaz	65000	38	31	125	2015
+34TC034	Ford	Mustang	kırmızı	85000	22	15	350	2013
+34HPP48	FİAT	Linea	beyaz	85000	28	21	150	2015
+34TCC54	FİAT	Linea	beyaz	150000	25	18	150	2015
+10AA935	Mercedes	E300	Siyah	300000	19	12	100	1995
+54BAH48	FİAT	Linea	beyaz	85000	29	22	150	2015
+99XX299	Mercedes	C220	Lacivert	455000	23	16	120	2001
+34CHH48	FİAT	Linea	beyaz	85000	27	20	150	2015
+\.
+
+
+--
+-- Data for Name: ehliyet; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.ehliyet (ehliyetno, tc, alinmatarihi, verildigisehir) FROM stdin;
+254546	99395643999	2023-12-25	4
+254654	99517598555	2022-12-25	82
+524654	55252456521	2021-12-25	31
+24565	99982851090	2001-12-21	34
+524545	98527388990	2023-12-25	21
+25372000	16852512665	2020-03-23	34
+57199097	18416504545	2002-11-12	35
+24191989	19421243065	2003-01-09	34
+65469363	19546094081	2004-01-14	34
+55713587	24656802582	2001-11-10	35
+10412976	27129173913	2002-10-02	5
+86319100	33281842233	2011-08-22	34
+17893813	36067003495	2021-08-24	34
+45535931	38205363993	2016-03-25	35
+98747562	38661810584	2001-03-04	34
+91819602	38997469832	2013-05-02	34
+57426571	42005514903	2005-09-23	35
+15549926	50264841111	2016-10-18	34
+28937866	52409528053	2000-11-06	34
+26734138	53648585714	2011-10-15	34
+77499501	55857650015	2004-08-17	34
+17563330	56210036927	2000-05-17	34
+94798037	56395758758	2005-02-06	34
+28674876	68310183112	2022-09-14	34
+34306571	71880746013	2007-02-03	35
+29855744	80001877564	2005-04-14	35
+17239584	83236455737	2010-07-07	34
+98875755	90568062955	2003-06-11	34
+79729310	91529202662	2010-03-20	34
+99391681	92979943023	2008-06-04	34
+60391350	94558194054	2000-02-15	1
+3323332	44812397054	2021-12-24	54
+452654	99517397000	2022-07-07	82
+2332221	99395643125	2021-12-24	24
+214554	55257397990	2022-12-24	5
+\.
+
+
+--
+-- Data for Name: kisi; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.kisi (tc, adsoyad, telefon, adres, dogumtarihi, email, ehliyetno, kisitipi) FROM stdin;
+99395643999	Ahmet Yılmaz	5012545454	sakarya	1999-12-25		254546	P
+56210036927	Burak Öztürk	586204360	Adres 96	1999-07-18	email1550@mail.com	17563330	M
+56395758758	Alirıza Öztürk	582214390	Adres 78	1976-08-11	email5399@mail.com	94798037	M
+99517598555	HUSEYN EMİRALİZADE	5015955454	Bakü	2004-09-02	hhhh1@gmail.com	254654	M
+68310183112	Ahmet Çelik	515373849	Adres 65	1997-06-15	email8130@mail.com	28674876	M
+71880746013	Veli Özdemir	558443681	Adres 44	1971-06-17	email2452@mail.com	34306571	M
+55252456521	MOHAMMED ALKERDİ	5462458565	Hatay	2003-05-24		524654	M
+99982851090	BASHAR EID	332333212	istanbul	2001-12-27	crazy1@gmal.com	24565	M
+98527388990	Mahir Ayar	5019997499	istanbul	1999-12-01		524545	P
+80001877564	Emre Özdemir	500872722	Adres 13	1994-07-06	email8232@mail.com	29855744	M
+16852512665	Ahmet Kara	568131479	Adres 43	1964-08-14	email4098@mail.com	25372000	M
+18416504545	Veli Yıldız	539266086	Adres 48	1975-04-20	email5831@mail.com	57199097	M
+19421243065	Ahmet Çelik	541699697	Adres 43	1961-07-18	email6176@mail.com	24191989	M
+19546094081	Ahmet Demir	578356870	Adres 17	1994-05-16	email8494@mail.com	65469363	M
+24656802582	Zeynep Öztürk	569289407	Adres 49	1975-01-09	email3175@mail.com	55713587	M
+27129173913	Elif Kaya	535409926	Adres 5	1963-08-19	email1731@mail.com	10412976	M
+33281842233	Elif Yıldız	593219370	Adres 77	1980-03-27	email2725@mail.com	86319100	M
+36067003495	Ali Öztürk	574697545	Adres 52	1966-06-16	email9145@mail.com	17893813	M
+38205363993	Emre Aksoy	590574188	Adres 30	1998-10-17	email9300@mail.com	45535931	M
+38661810584	Ali Yıldız	555082323	Adres 69	1995-07-11	email2020@mail.com	98747562	M
+83236455737	Ayşe Yıldız	542482694	Adres 99	1989-11-23	email4096@mail.com	17239584	M
+90568062955	Ali Yılmaz	560378032	Adres 5	1983-05-13	email6629@mail.com	98875755	M
+38997469832	Elif Çelik	560145485	Adres 89	1963-09-02	email1058@mail.com	91819602	M
+91529202662	Fatma Öztürk	578370390	Adres 82	2000-08-02	email6914@mail.com	79729310	M
+92979943023	Emre Aksoy	527689003	Adres 77	1979-06-15	email3028@mail.com	99391681	M
+94558194054	Fatma Öztürk	545040998	Adres 34	2000-01-20	email8847@mail.com	60391350	M
+42005514903	Ali Kaya	568110869	Adres 60	1974-03-11	email2634@mail.com	57426571	M
+50264841111	Mehmet Kara	561942079	Adres 33	1964-08-22	email7126@mail.com	15549926	M
+52409528053	Burak Kara	503230557	Adres 46	1982-11-24	email9513@mail.com	28937866	M
+53648585714	Elif Çelik	502334771	Adres 1	1971-06-11	email7028@mail.com	26734138	M
+55857650015	Burak Yılmaz	522202020	Adres 13	1972-02-06	email6725@mail.com	77499501	M
+44812397054	Samet Yılmaz	50158425	Sakarya	1999-11-02	yilmaz@mail.com	3323332	P
+99517397000	Amil Shikhiyev	5012607454	istanbul	2005-07-27	sxiyev4@gmail.com	452654	P
+99395643125	Burak Kaan	5012608888	sakarya	2000-05-01		2332221	P
+55257397990	Koray Han	2602133232	istanbul	2001-12-24		214554	P
+\.
+
+
+--
+-- Data for Name: kullanici; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.kullanici (kullanici_tc, sifre, yetki) FROM stdin;
+98527388990	98527388990	şöför
+44812397054	12345	Müdür
+99517397000	1234	Yönetici
+99395643125	99395643125	şöfor
+55257397990	1234	şöför
+\.
+
+
+--
+-- Data for Name: kullanimdurumu; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.kullanimdurumu (id, arac_plaka, kullanim_durumu) FROM stdin;
+18	34TCC54	BOŞ
+22	54BAH48	BOŞ
+25	34AZE48	DOLU
+29	34BAH49	DOLU
+27	34TCP54	DOLU
+12	10AA935	BOŞ
+21	34HPP48	BOŞ
+28	34BAH45	BOŞ
+30	34BAH51	BOŞ
+31	34BAH52	BOŞ
+16	99XX299	BOŞ
+26	34AZE54	BOŞ
+20	34CHH48	BOŞ
+24	34BAZ48	BOŞ
+15	34TC034	HASARLI
+\.
+
+
+--
+-- Data for Name: musteri; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.musteri (tc) FROM stdin;
+99982851090
+99517598555
+55252456521
+16852512665
+18416504545
+19421243065
+19546094081
+24656802582
+27129173913
+33281842233
+36067003495
+38205363993
+38661810584
+38997469832
+42005514903
+50264841111
+52409528053
+53648585714
+55857650015
+56210036927
+56395758758
+68310183112
+71880746013
+80001877564
+83236455737
+90568062955
+91529202662
+92979943023
+94558194054
+\.
+
+
+--
+-- Data for Name: personel; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.personel (maas, gorevi, tc) FROM stdin;
+15000	şöför	98527388990
+15000	Müdür	44812397054
+0	Yönetici	99517397000
+15000	şöfor	99395643125
+20000	şöför	55257397990
+\.
+
+
+--
+-- Data for Name: sehir; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.sehir (id, "SehirAdi") FROM stdin;
+1	Adana
+2	Adıyaman
+3	Afyonkarahisar
+4	Ağrı
+5	Amasya
+6	Ankara
+7	Antalya
+8	Artvin
+9	Aydın
+10	Balıkesir
+11	Bilecik
+12	Bingöl
+13	Bitlis
+14	Bolu
+15	Burdur
+16	Bursa
+17	Çanakkale
+18	Çankırı
+19	Çorum
+20	Denizli
+21	Diyarbakır
+22	Edirne
+23	Elazığ
+24	Erzincan
+25	Erzurum
+26	Eskişehir
+27	Gaziantep
+28	Giresun
+29	Gümüşhane
+30	Hakkâri
+31	Hatay
+32	Isparta
+33	İçel (Mersin)
+34	İstanbul
+35	İzmir
+36	Kars
+37	Kastamonu
+38	Kayseri
+39	Kırklareli
+40	Kırşehir
+41	Kocaeli
+42	Konya
+43	Kütahya
+44	Malatya
+45	Manisa
+46	Kahramanmaraş
+47	Mardin
+48	Muğla
+49	Muş
+50	Nevşehir
+51	Niğde
+52	Ordu
+53	Rize
+54	Sakarya
+55	Samsun
+56	Siirt
+57	Sinop
+58	Sivas
+59	Tekirdağ
+60	Tokat
+61	Trabzon
+62	Tunceli
+63	Şanlıurfa
+64	Uşak
+65	Van
+66	Yozgat
+67	Zonguldak
+68	Aksaray
+69	Bayburt
+70	Karaman
+71	Kırıkkale
+72	Batman
+73	Şırnak
+74	Bartın
+75	Ardahan
+76	Iğdır
+77	Yalova
+78	Karabük
+79	Kilis
+80	Osmaniye
+81	Düzce
+82	Diğer (Yurtdışı)
+\.
+
+
+--
+-- Name: AracBakim_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."AracBakim_id_seq"', 20, true);
+
+
+--
+-- Name: FaturaTablo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."FaturaTablo_id_seq"', 19, true);
+
+
+--
+-- Name: KiraSekliTablo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."KiraSekliTablo_id_seq"', 5, true);
+
+
+--
+-- Name: KiralamaGecmisi_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."KiralamaGecmisi_id_seq"', 47, true);
+
+
+--
+-- Name: YakitDurumu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."YakitDurumu_id_seq"', 39, true);
+
+
+--
+-- Name: araclarinkullanimdurumu_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.araclarinkullanimdurumu_id_seq', 32, true);
+
+
+--
+-- Name: table1_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.table1_id_seq', 53, true);
+
+
+--
+-- Name: table1_id_seq1; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.table1_id_seq1', 13, true);
 
 
 --
@@ -886,11 +1332,11 @@ CREATE TRIGGER trigger_kullanici_personel_ekle AFTER INSERT ON public.personel F
 
 
 --
--- Name: kullanici PersonelKullanici; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: HasarTablosu aracHasar; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.kullanici
-    ADD CONSTRAINT "PersonelKullanici" FOREIGN KEY (kullanici_tc) REFERENCES public.personel(tc) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public."HasarTablosu"
+    ADD CONSTRAINT "aracHasar" FOREIGN KEY (arac_plaka) REFERENCES public.arac(plaka) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -907,6 +1353,30 @@ ALTER TABLE ONLY public.kullanimdurumu
 
 ALTER TABLE ONLY public."YakitDurumu"
     ADD CONSTRAINT "aracYakit" FOREIGN KEY (arac_plaka) REFERENCES public.arac(plaka) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: AracBakim aracbakim; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."AracBakim"
+    ADD CONSTRAINT aracbakim FOREIGN KEY (arac_plaka) REFERENCES public.arac(plaka) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: ehliyet ehliyetSehir; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ehliyet
+    ADD CONSTRAINT "ehliyetSehir" FOREIGN KEY (verildigisehir) REFERENCES public.sehir(id) MATCH FULL;
+
+
+--
+-- Name: FaturaTablo gecmisFatura; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."FaturaTablo"
+    ADD CONSTRAINT "gecmisFatura" FOREIGN KEY (satis_id) REFERENCES public."KiralamaGecmisi"(id) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -939,6 +1409,14 @@ ALTER TABLE ONLY public.personel
 
 ALTER TABLE ONLY public.kullanici
     ADD CONSTRAINT "personelKullanici" FOREIGN KEY (kullanici_tc) REFERENCES public.personel(tc) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: KiralamaSozlesmesi sozlesmeKiraSekli; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."KiralamaSozlesmesi"
+    ADD CONSTRAINT "sozlesmeKiraSekli" FOREIGN KEY (kirasekli) REFERENCES public."KiraSekliTablo"(id) MATCH FULL;
 
 
 --
